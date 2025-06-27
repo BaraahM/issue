@@ -1,0 +1,44 @@
+/* Editor-specific global styles to prevent conflicts with main app */
+@import "tailwindcss";
+
+/* Reset any inherited styles from the main app */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* Ensure the editor takes full screen */
+#__next {
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Override any Mantine styles that might interfere */
+.mantine-provider {
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Ensure editor components don't inherit unwanted styles */
+.editor-container {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+/* Remove any potential scrollbars from the main app */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+} 

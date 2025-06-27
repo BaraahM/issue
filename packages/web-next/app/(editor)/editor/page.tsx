@@ -29,7 +29,11 @@ function EditorContent() {
     return null;
   }, [searchParams]);
 
-  return <PlateEditorWrapper initialTemplate={templateData} />;
+  return (
+    <div className="editor-container">
+      <PlateEditorWrapper initialTemplate={templateData} />
+    </div>
+  );
 }
 
 export default function EditorPage() {
