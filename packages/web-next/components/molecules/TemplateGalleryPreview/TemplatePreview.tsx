@@ -12,11 +12,8 @@ const TemplatePreview = ({ selectedTemplate }: TemplatePreviewProps) => {
   const router = useRouter();
 
   const handleStartFromTemplate = () => {
-    if (!selectedTemplate) return;
-    // Pass name and content as query params
-    const name = encodeURIComponent(selectedTemplate.name || '');
-    const content = encodeURIComponent(selectedTemplate.content || '');
-    router.push(`/editor?name=${name}&content=${content}`);
+    // Simply redirect to the standalone editor without any template data
+    router.push('/editor');
   };
 
   if (!selectedTemplate) {

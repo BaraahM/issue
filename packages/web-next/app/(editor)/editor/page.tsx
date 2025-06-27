@@ -1,8 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useSearchParams } from 'next/navigation';
-import React, { useMemo } from 'react';
+import React from 'react';
 
 // Dynamically import PlateEditorWrapper with SSR disabled
 const PlateEditorWrapper = dynamic(
@@ -14,24 +13,10 @@ const PlateEditorWrapper = dynamic(
 );
 
 function EditorContent() {
-  const searchParams = useSearchParams();
-
-  const templateData = useMemo(() => {
-    const templateName = searchParams.get('template');
-    const templateContent = searchParams.get('content');
-
-    if (templateName || templateContent) {
-      return {
-        content: templateContent,
-        name: templateName,
-      };
-    }
-    return null;
-  }, [searchParams]);
-
+  // No template data needed - just render the standalone editor
   return (
     <div className="editor-container">
-      <PlateEditorWrapper initialTemplate={templateData} />
+      <PlateEditorWrapper initialTemplate={null} />
     </div>
   );
 }
