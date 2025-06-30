@@ -76,3 +76,45 @@
 - `packages/web-next/app/(editor)/editor/page.tsx` - Editor page  
 - `packages/web-next/app/(editor)/layout.tsx` - Editor layout  
 - `packages/plate-editor/tailwind.config.js` - Editor-specific styling
+
+
+
+
+
+## 📝 Notes on Migration Strategy: Mantine Integration Options
+
+### Option 1: Manually Convert Plate.js Files to Mantine
+
+**Effort & Timeline:**
+- Already copied a large number of Plate.js files (core, plugins, UI, hooks).
+- To "adjust all of them to be Mantine-based" requires:
+  - Refactoring every component to use Mantine primitives instead of Tailwind/shadcn/ui/Radix.
+  - Rewriting all styles (dozens of files).
+  - Replacing all UI logic (menus, dialogs, toolbars, overlays) with Mantine equivalents.
+  - Fixing all import paths and resolving deep dependency chains.
+  - Testing and debugging every feature (AI, collaboration, uploads, versioning, etc.).
+- **Estimated effort**: Several weeks (potentially longer with AI tools like Cursor or Claude, as they will require lots of context and iterative fixes for each file due to the complexity and cross-dependencies).
+- **Risks**: High risk of regressions, missed edge cases, and ongoing maintenance burden as Plate.js and Mantine both update.
+
+---
+
+### Option 2: Make the Editor a Package/Dependency
+
+**Effort & Timeline:**
+- Extract the editor (from `editor-main`) as a standalone package (`@barum/plate-editor`).
+- Publish it to the monorepo (as a local package or npm package).
+- Expose a clear API/component for usage in the Mantine-based app.
+- Only adapt the top-level wrapper or a few integration points to Mantine (e.g., modals, notifications, theme).
+- **Estimated effort**: Days for initial packaging and integration, plus some time for Mantine theming at the interface boundary.
+- **Risks**: Much lower. Update the editor package independently.
+
+---
+
+**Summary:**
+- **Manual conversion**: Weeks of work, high risk, not recommended.
+- **Editor as a package**: 2–5 days, lower risk, easier to maintain, recommended.
+
+| Approach               | User Experience           | Effort     | Maintainability | Risks   |
+|------------------------|---------------------------|------------|-----------------|---------|
+| Editor as a Package    | Seamless, unified, fast   | Low–Medium | High            | Low     |
+| Manual File Conversion | Risk of bugs, mismatches  | High       | Low             | High    |
