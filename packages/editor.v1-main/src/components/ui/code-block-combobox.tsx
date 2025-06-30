@@ -116,13 +116,11 @@ const languages: { label: string; value: string }[] = [
 ];
 
 export function CodeBlockCombobox() {
-  const [open, setOpen] = React.useState(false);
   const readOnly = useReadOnly();
   const editor = useEditorRef();
   const element = useElement<TCodeBlockElement>();
   const value = element.lang || 'plaintext';
   const [searchValue, setSearchValue] = React.useState('');
-
   const items = React.useMemo(
     () =>
       languages.filter(
@@ -132,17 +130,14 @@ export function CodeBlockCombobox() {
       ),
     [searchValue]
   );
-
   if (readOnly) return null;
-
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover>
       <PopoverTrigger asChild>
         <Button
           size="sm"
           variant="ghost"
           className="h-6 justify-between gap-1 px-2 text-xs text-muted-foreground select-none"
-          aria-expanded={open}
           role="combobox"
         >
           {languages.find((language) => language.value === value)?.label ??
@@ -161,7 +156,6 @@ export function CodeBlockCombobox() {
             placeholder="Search language..."
           />
           <CommandEmpty>No language found.</CommandEmpty>
-
           <CommandList className="h-[344px] overflow-y-auto">
             <CommandGroup>
               {items.map((language) => (
@@ -175,7 +169,6 @@ export function CodeBlockCombobox() {
                       { at: element }
                     );
                     setSearchValue(value);
-                    setOpen(false);
                   }}
                 >
                   <Check

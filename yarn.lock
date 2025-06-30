@@ -954,8 +954,8 @@ __metadata:
     "@radix-ui/react-toolbar": ^1.1.9
     "@radix-ui/react-tooltip": ^1.2.6
     "@types/node": ^22.15.17
-    "@types/react": ^19.1.3
-    "@types/react-dom": ^19.1.3
+    "@types/react": ^18.2.45
+    "@types/react-dom": ^18.2.17
     "@typescript-eslint/parser": ^8.32.0
     "@udecode/cmdk": 0.2.1
     "@udecode/cn": 48.0.3
@@ -1061,6 +1061,7 @@ __metadata:
     "@testing-library/user-event": ^14.5.0
     "@types/jest": ^29.5.5
     "@types/react": ^18.2.45
+    "@types/react-dom": ^18.2.17
     "@typescript-eslint/eslint-plugin": ^8.33.0
     "@typescript-eslint/parser": ^8.33.0
     eslint: ^8.53.0
@@ -1070,6 +1071,7 @@ __metadata:
     jest-environment-jsdom: ^29.7.0
     prettier: ^3.0.0
     react: ^18.2.0
+    react-dom: ^18.2.0
     ts-jest: ^29.1.1
     tsup: ^8.5.0
     typescript: ^5.3.3
@@ -1099,8 +1101,8 @@ __metadata:
     "@types/jest": ^29.5.5
     "@types/luxon": ^3.3.7
     "@types/node": ^20.0.0
-    "@types/react": ^18.2.0
-    "@types/react-dom": ^18.2.0
+    "@types/react": ^18.2.45
+    "@types/react-dom": ^18.2.17
     "@typescript-eslint/parser": ^8.33.0
     clsx: ^2.1.1
     eslint: ^8.53.0
@@ -4884,9 +4886,9 @@ __metadata:
   linkType: hard
 
 "@rushstack/eslint-patch@npm:^1.3.3":
-  version: 1.11.0
-  resolution: "@rushstack/eslint-patch@npm:1.11.0"
-  checksum: abea8d8cf2f4f50343f74abd6a8173c521ddd09b102021f5aa379ef373c40af5948b23db0e87eca1682e559e09d97d3f0c48ea71edad682c6bf72b840c8675b3
+  version: 1.12.0
+  resolution: "@rushstack/eslint-patch@npm:1.12.0"
+  checksum: 1e567656d92632c085a446f40767bc451caffe1131e8d6a7a3e8f3e3f4167f5f29744a84c709f2440f299442d4bc68ff773784462166800b8c09c0e08042415b
   languageName: node
   linkType: hard
 
@@ -7928,6 +7930,8 @@ __metadata:
     "@types/multer": ^1.4.12
     "@types/node": 20.10.5
     "@types/nodemailer": ^6.4.15
+    "@types/react": ^18.2.45
+    "@types/react-dom": ^18.2.17
     "@types/supertest": 6.0.2
     "@typescript-eslint/eslint-plugin": 6.16.0
     "@typescript-eslint/parser": 6.16.0
@@ -7953,8 +7957,8 @@ __metadata:
     prettier: 3.1.1
     prisma: 5.8.0
     prisma-dbml-generator: 0.10.0
-    react: ^18.3.1
-    react-dom: ^18.3.1
+    react: ^18.2.0
+    react-dom: ^18.2.0
     react-email: 3.0.1
     reflect-metadata: latest
     rimraf: 5.0.5
@@ -18516,8 +18520,8 @@ __metadata:
     "@radix-ui/react-tooltip": ^1.2.6
     "@tailwindcss/postcss": ^4.1.6
     "@types/node": ^22.15.17
-    "@types/react": ^18.2.0
-    "@types/react-dom": ^18.2.0
+    "@types/react": ^18.2.45
+    "@types/react-dom": ^18.2.17
     "@typescript-eslint/parser": ^8.32.0
     "@udecode/cmdk": 0.2.1
     "@udecode/cn": 48.0.3
@@ -18587,11 +18591,11 @@ __metadata:
     postcss: ^8.5.3
     prettier: ^3.5.3
     prettier-plugin-packagejson: ^2.5.12
-    react: ^19.1.0
+    react: ^18.2.0
     react-day-picker: 8.10.1
     react-dnd: ^16.0.1
     react-dnd-html5-backend: ^16.0.1
-    react-dom: ^19.1.0
+    react-dom: ^18.2.0
     react-lite-youtube-embed: ^2.5.1
     react-player: ^2.16.0
     react-resizable-panels: ^2.1.7
@@ -18800,11 +18804,11 @@ __metadata:
   linkType: hard
 
 "prettier@npm:^3.0.0, prettier@npm:^3.1.1, prettier@npm:^3.5.3":
-  version: 3.6.1
-  resolution: "prettier@npm:3.6.1"
+  version: 3.6.2
+  resolution: "prettier@npm:3.6.2"
   bin:
     prettier: bin/prettier.cjs
-  checksum: cf54254b9ddf1a8dff12f84bf0089e6aef3eeb9d0ce9d0344e39549ddc4f5c290fc5060d7d5a597848b9617e53e05b33a4118e37cd560f9e132ecc19c211300a
+  checksum: 488cb2f2b99ec13da1e50074912870217c11edaddedeadc649b1244c749d15ba94e846423d062e2c4c9ae683e2d65f754de28889ba06e697ac4f988d44f45812
   languageName: node
   linkType: hard
 
@@ -22444,9 +22448,9 @@ __metadata:
   linkType: hard
 
 "undici@npm:^7.10.0":
-  version: 7.10.0
-  resolution: "undici@npm:7.10.0"
-  checksum: 756ac876a8df845bc89eb8348c35d33a0ff63c17eb45b664075c961a7fbd4a398f94f9dce438262f55fe66e4bbb0a46aa63a3fd58ce51361c616aff11a270450
+  version: 7.11.0
+  resolution: "undici@npm:7.11.0"
+  checksum: e5dd3cc2acae9c8333f97a78d4e91108957367fa7e69918e3a5cbd84702cb453cf7de3f8c2a33bcf808850d78ead70f3bd62900a70d969912e9fed8842bbfc11
   languageName: node
   linkType: hard
 
@@ -23212,8 +23216,8 @@ __metadata:
     "@mantine/hooks": 7.12.1
     "@tabler/icons-react": ^2.44.0
     "@types/node": 20.8.10
-    "@types/react": 18.2.35
-    "@types/react-dom": 18.2.14
+    "@types/react": 18.2.45
+    "@types/react-dom": 18.2.17
     "@typescript-eslint/parser": ^8.33.0
     eslint: 8.53.0
     eslint-config-next: ^14.2.4

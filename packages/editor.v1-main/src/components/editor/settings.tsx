@@ -38,6 +38,15 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
+import { useEditorRef } from '@udecode/plate/react';
+import { usePlateState } from '@udecode/plate/react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuGroup,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 interface Model {
   label: string;

@@ -40,15 +40,17 @@ export function TableDropdownMenu(props: DropdownMenuProps) {
   );
 
   const { editor, tf } = useEditorPlugin(TablePlugin);
-  const [open, setOpen] = React.useState(false);
   const mergeState = useTableMergeState();
 
   return (
-    <DropdownMenu open={open} onOpenChange={setOpen} modal={false} {...props}>
+    <DropdownMenu {...props}>
       <DropdownMenuTrigger asChild>
-        <ToolbarButton pressed={open} tooltip="Table" isDropdown>
+        <button
+          className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0"
+          title="Table"
+        >
           <Table />
-        </ToolbarButton>
+        </button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent

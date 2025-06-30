@@ -152,7 +152,7 @@ export function Draggable(props: PlateElementProps) {
         </Gutter>
       )}
 
-      <div ref={previewRef} className="slate-blockWrapper">
+      <div ref={previewRef as React.LegacyRef<HTMLDivElement>} className="slate-blockWrapper">
         <MemoizedChildren>{children}</MemoizedChildren>
         <DropLine />
       </div>

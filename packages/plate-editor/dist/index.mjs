@@ -1,5 +1,5 @@
 import * as React19 from 'react';
-import React19__default, { createContext, Suspense, useState, useRef, useEffect, useCallback, useContext, useMemo } from 'react';
+import React19__default, { createContext, Suspense, useState, useEffect, useRef, useCallback, useContext, useMemo } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { toTPlatePlugin, useHotkeys, ParagraphPlugin, createPlatePlugin, PlateContent, useComposedRef, createPrimitiveComponent, usePlateEditor, usePluginOption, useEditorRef, useElement, withHOC, useReadOnly, PlateElement, useEditorPlugin, useEditorMounted, createNodeHOC, createNodesHOC, useSelected, useRemoveNodeButton, useEditorSelector, PlateLeaf, useEditorReadOnly, useEditorId, useEventEditorValue, usePlateState, useFormInputProps, usePlaceholderState, useElementSelector, useFocused, PlateText, useSelectionFragmentProp, useMarkToolbarButtonState, useMarkToolbarButton, MemoizedChildren, useEditorSelection, Plate, usePath, PlateContainer, useEditorString } from '@udecode/plate/react';
@@ -15256,6 +15256,12 @@ function PlateEditor({ initialTemplate } = {}) {
     ] })
   ] }) }) }) }) });
 }
+function ClientOnly({ children }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
+  return /* @__PURE__ */ jsx(Fragment, { children });
+}
 function EditorContent({ initialTemplate }) {
   return /* @__PURE__ */ jsxs("div", { className: "h-screen w-full", children: [
     /* @__PURE__ */ jsx(SettingsProvider, { children: /* @__PURE__ */ jsx(PlateEditor, { initialTemplate }) }),
@@ -15263,7 +15269,7 @@ function EditorContent({ initialTemplate }) {
   ] });
 }
 function PlateEditorWrapper({ initialTemplate }) {
-  return /* @__PURE__ */ jsx(Suspense, { fallback: /* @__PURE__ */ jsx("div", { className: "h-screen w-full flex items-center justify-center", children: "Loading editor..." }), children: /* @__PURE__ */ jsx(EditorContent, { initialTemplate }) });
+  return /* @__PURE__ */ jsx(ClientOnly, { children: /* @__PURE__ */ jsx(Suspense, { fallback: /* @__PURE__ */ jsx("div", { className: "h-screen w-full flex items-center justify-center", children: "Loading editor..." }), children: /* @__PURE__ */ jsx(EditorContent, { initialTemplate }) }) });
 }
 
 export { PlateEditor, PlateEditorWrapper };

@@ -4,6 +4,7 @@ import * as React from 'react';
 
 import type { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
 
+import { DropdownMenuItemIndicator } from '@radix-ui/react-dropdown-menu';
 import { type Alignment, setAlign } from '@udecode/plate-alignment';
 import { useEditorRef, useSelectionFragmentProp } from '@udecode/plate/react';
 import {
@@ -21,8 +22,6 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-
-import { ToolbarButton } from './toolbar';
 
 const items = [
   {
@@ -50,17 +49,19 @@ export function AlignDropdownMenu(props: DropdownMenuProps) {
     structuralTypes: STRUCTURAL_TYPES,
     getProp: (node) => node.align,
   });
-
-  const [open, setOpen] = React.useState(false);
   const IconValue =
     items.find((item) => item.value === value)?.icon ?? AlignLeftIcon;
 
   return (
-    <DropdownMenu open={open} onOpenChange={setOpen} modal={false} {...props}>
+    <DropdownMenu {...props}>
       <DropdownMenuTrigger asChild>
-        <ToolbarButton pressed={open} tooltip="Align" isDropdown>
-          <IconValue />
-        </ToolbarButton>
+        <button
+          type="button"
+          className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:bg-muted hover:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 h-8 min-w-8 px-1.5 bg-transparent"
+          title="Align"
+        >
+          <IconValue className="size-4" />
+        </button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="min-w-0" align="start">

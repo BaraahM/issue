@@ -16,6 +16,7 @@ import {
 import { useForm } from '@mantine/form';
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useAuthContext } from '../../context/AuthContextProvider';
 import AuthPageLayout from '../../components/layout/AuthPageLayout';
 import GoogleSignInButton from '../../components/auth/GoogleSignInButton';
@@ -25,6 +26,7 @@ export default function LoginPage() {
   const [showSuccessMessageForMagicLink, setShowSuccessMessageForMagicLink] =
     useState(false);
   const { signIn, error, isLoading } = useAuthContext();
+  const router = useRouter();
 
   const isDemoMode =
     !process.env.NEXT_PUBLIC_SUPABASE_URL ||
@@ -54,8 +56,8 @@ export default function LoginPage() {
           console.log('Demo mode: Simulating login for:', values.email);
           await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
 
-          // Navigate to dashboard
-          window.location.href = '/dashboard';
+          // Navigate to dashboard using Next.js router
+          router.push('/dashboard');
           return;
         }
 

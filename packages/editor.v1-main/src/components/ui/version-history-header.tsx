@@ -1,4 +1,3 @@
-
 'use client';
 
 import * as React from 'react';
@@ -45,7 +44,7 @@ export function VersionHistoryHeader({
 
   return (
     <div className="flex justify-center w-full py-2 bg-background border-b border-border">
-      <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+      <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
             size="sm"

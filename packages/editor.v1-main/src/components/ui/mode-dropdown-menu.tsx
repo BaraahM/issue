@@ -11,6 +11,7 @@ import {
   useEditorRef,
   usePlateState,
   usePluginOption,
+  useEditorSelector,
 } from '@udecode/plate/react';
 import { CheckIcon, EyeIcon, PencilLineIcon, PenIcon } from 'lucide-react';
 
@@ -27,7 +28,6 @@ import { ToolbarButton } from './toolbar';
 export function ModeDropdownMenu(props: DropdownMenuProps) {
   const editor = useEditorRef();
   const [readOnly, setReadOnly] = usePlateState('readOnly');
-  const [open, setOpen] = React.useState(false);
 
   const isSuggesting = usePluginOption(SuggestionPlugin, 'isSuggesting');
 
@@ -42,23 +42,26 @@ export function ModeDropdownMenu(props: DropdownMenuProps) {
       icon: <PenIcon />,
       label: 'Editing',
     },
-    suggestion: {
-      icon: <PencilLineIcon />,
-      label: 'Suggestion',
-    },
     viewing: {
       icon: <EyeIcon />,
       label: 'Viewing',
     },
+    suggestion: {
+      icon: <PencilLineIcon />,
+      label: 'Suggesting',
+    },
   };
 
   return (
-    <DropdownMenu open={open} onOpenChange={setOpen} modal={false} {...props}>
+    <DropdownMenu {...props}>
       <DropdownMenuTrigger asChild>
-        <ToolbarButton pressed={open} tooltip="Editing mode" isDropdown>
+        <button
+          className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3"
+          title="Editing mode"
+        >
           {item[value].icon}
           <span className="hidden lg:inline">{item[value].label}</span>
-        </ToolbarButton>
+        </button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="min-w-[180px]" align="start">
@@ -88,32 +91,13 @@ export function ModeDropdownMenu(props: DropdownMenuProps) {
             }
           }}
         >
-          <DropdownMenuRadioItem
-            className="pl-2 *:first:[span]:hidden *:[svg]:text-muted-foreground"
-            value="editing"
-          >
-            <Indicator />
-            {item.editing.icon}
-            {item.editing.label}
-          </DropdownMenuRadioItem>
-
-          <DropdownMenuRadioItem
-            className="pl-2 *:first:[span]:hidden *:[svg]:text-muted-foreground"
-            value="viewing"
-          >
-            <Indicator />
-            {item.viewing.icon}
-            {item.viewing.label}
-          </DropdownMenuRadioItem>
-
-          <DropdownMenuRadioItem
-            className="pl-2 *:first:[span]:hidden *:[svg]:text-muted-foreground"
-            value="suggestion"
-          >
-            <Indicator />
-            {item.suggestion.icon}
-            {item.suggestion.label}
-          </DropdownMenuRadioItem>
+          {Object.entries(item).map(([key, { icon, label }]) => (
+            <DropdownMenuRadioItem key={key} value={key}>
+              {icon}
+              <span>{label}</span>
+              <Indicator />
+            </DropdownMenuRadioItem>
+          ))}
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

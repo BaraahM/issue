@@ -50,30 +50,8 @@ export const useCommentEditor = (
   options: Omit<CreatePlateEditorOptions, 'plugins'> = {},
   deps: any[] = []
 ) => {
-  const commentEditor = useCreateEditor(
-    {
-      id: 'comment',
-      components: {
-        [AIPlugin.key]: AILeaf,
-        [BoldPlugin.key]: withProps(PlateLeaf, { as: 'strong' }),
-        [DatePlugin.key]: DateElement,
-        [EmojiInputPlugin.key]: EmojiInputElement,
-        [InlineEquationPlugin.key]: InlineEquationElement,
-        [ItalicPlugin.key]: withProps(PlateLeaf, { as: 'em' }),
-        [LinkPlugin.key]: LinkElement,
-        [MentionInputPlugin.key]: MentionInputElement,
-        [MentionPlugin.key]: MentionElement,
-        [StrikethroughPlugin.key]: withProps(PlateLeaf, { as: 's' }),
-        [UnderlinePlugin.key]: withProps(PlateLeaf, { as: 'u' }),
-        // [SlashInputPlugin.key]: SlashInputElement,
-      },
-      placeholders: false,
-      plugins: [BasicMarksPlugin],
-      value: [],
-      ...options,
-    },
-    deps
-  );
+  const safeOptions = { ...options, value: undefined };
+  const commentEditor = useCreateEditor(safeOptions, []);
 
   return commentEditor;
 };
@@ -231,7 +209,14 @@ export function CommentCreateForm({
       <div className="relative flex grow gap-2">
         <Plate
           onChange={({ value }) => {
-            setCommentValue(value);
+            if (Array.isArray(value)) {
+              setCommentValue((prev) => {
+                if (!prev || JSON.stringify(prev) !== JSON.stringify(value)) {
+                  return value;
+                }
+                return prev;
+              });
+            }
           }}
           editor={commentEditor}
         >

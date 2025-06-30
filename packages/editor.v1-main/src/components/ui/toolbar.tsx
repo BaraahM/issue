@@ -117,7 +117,7 @@ type ToolbarButtonProps = {
   pressed?: boolean;
 } & Omit<
   React.ComponentPropsWithoutRef<typeof ToolbarToggleItem>,
-  'asChild' | 'value'
+  'value'
 > &
   VariantProps<typeof toolbarButtonVariants>;
 
@@ -128,8 +128,29 @@ export const ToolbarButton = withTooltip(function ToolbarButton({
   pressed,
   size = 'sm',
   variant,
+  asChild,
   ...props
 }: ToolbarButtonProps) {
+  // If asChild is true, return children directly for proper ref forwarding
+  if (asChild) {
+    return (
+      <button
+        type="button"
+        className={cn(
+          toolbarButtonVariants({
+            size,
+            variant,
+          }),
+          isDropdown && 'pr-1',
+          className
+        )}
+        {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
+      >
+        {children}
+      </button>
+    );
+  }
+
   return typeof pressed === 'boolean' ? (
     <ToolbarToggleGroup disabled={props.disabled} value="single" type="single">
       <ToolbarToggleItem

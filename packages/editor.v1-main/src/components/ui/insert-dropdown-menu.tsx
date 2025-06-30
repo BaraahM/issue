@@ -238,12 +238,11 @@ const groups: Group[] = [
 
 export function InsertDropdownMenu(props: DropdownMenuProps) {
   const editor = useEditorRef();
-  const [open, setOpen] = React.useState(false);
 
   return (
-    <DropdownMenu open={open} onOpenChange={setOpen} modal={false} {...props}>
+    <DropdownMenu {...props}>
       <DropdownMenuTrigger asChild>
-        <ToolbarButton pressed={open} tooltip="Insert" isDropdown>
+        <ToolbarButton tooltip="Insert" isDropdown>
           <PlusIcon />
         </ToolbarButton>
       </DropdownMenuTrigger>

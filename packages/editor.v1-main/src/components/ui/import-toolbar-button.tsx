@@ -4,11 +4,8 @@ import * as React from 'react';
 
 import type { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
 
-import { getEditorDOMFromHtmlString } from '@udecode/plate';
-import { MarkdownPlugin } from '@udecode/plate-markdown';
 import { useEditorRef } from '@udecode/plate/react';
-import { ArrowUpToLineIcon } from 'lucide-react';
-import { useFilePicker } from 'use-file-picker';
+import { DownloadIcon, FileTextIcon } from 'lucide-react';
 
 import {
   DropdownMenu,
@@ -18,79 +15,63 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { ToolbarButton } from './toolbar';
-
-type ImportType = 'html' | 'markdown';
-
 export function ImportToolbarButton(props: DropdownMenuProps) {
   const editor = useEditorRef();
-  const [open, setOpen] = React.useState(false);
 
-  const getFileNodes = (text: string, type: ImportType) => {
-    if (type === 'html') {
-      const editorNode = getEditorDOMFromHtmlString(text);
-      const nodes = editor.api.html.deserialize({
-        element: editorNode,
-      });
+  const handleImport = async (format: string) => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = format === 'markdown' ? '.md,.markdown' : '.json';
+    input.onchange = async (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (!file) return;
 
-      return nodes;
-    }
+      const text = await file.text();
+      let value;
 
-    if (type === 'markdown') {
-      return editor.getApi(MarkdownPlugin).markdown.deserialize(text);
-    }
+      try {
+        if (format === 'markdown') {
+          // Import markdown - simplified for now
+          console.log('Markdown import not implemented yet');
+          return;
+        } else {
+          // Import JSON
+          value = JSON.parse(text);
+        }
 
-    return [];
+        editor.tf.insertNodes(value);
+        editor.tf.focus();
+      } catch (error) {
+        console.error('Import failed:', error);
+      }
+    };
+    input.click();
   };
 
-  const { openFilePicker: openMdFilePicker } = useFilePicker({
-    accept: ['.md', '.mdx'],
-    multiple: false,
-    onFilesSelected: async ({ plainFiles }) => {
-      const text = await plainFiles[0].text();
-
-      const nodes = getFileNodes(text, 'markdown');
-
-      editor.tf.insertNodes(nodes);
-    },
-  });
-
-  const { openFilePicker: openHtmlFilePicker } = useFilePicker({
-    accept: ['text/html'],
-    multiple: false,
-    onFilesSelected: async ({ plainFiles }) => {
-      const text = await plainFiles[0].text();
-
-      const nodes = getFileNodes(text, 'html');
-
-      editor.tf.insertNodes(nodes);
-    },
-  });
-
   return (
-    <DropdownMenu open={open} onOpenChange={setOpen} modal={false} {...props}>
+    <DropdownMenu {...props}>
       <DropdownMenuTrigger asChild>
-        <ToolbarButton pressed={open} tooltip="Import" isDropdown>
-          <ArrowUpToLineIcon className="size-4" />
-        </ToolbarButton>
+        <button
+          type="button"
+          className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:bg-muted hover:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 h-8 min-w-8 px-1.5 bg-transparent"
+          title="Import"
+        >
+          <DownloadIcon className="size-4" />
+        </button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent align="start">
+      <DropdownMenuContent
+        className="ignore-click-outside/toolbar flex max-h-[500px] min-w-[180px] flex-col overflow-y-auto"
+        align="start"
+      >
         <DropdownMenuGroup>
-          <DropdownMenuItem
-            onSelect={() => {
-              openHtmlFilePicker();
-            }}
-          >
-            Import from HTML
+          <DropdownMenuItem onSelect={() => handleImport('markdown')}>
+            <FileTextIcon />
+            Import Markdown
           </DropdownMenuItem>
-
-          <DropdownMenuItem
-            onSelect={() => {
-              openMdFilePicker();
-            }}
-          >
-            Import from Markdown
+          <DropdownMenuItem onSelect={() => handleImport('json')}>
+            <FileTextIcon />
+            Import JSON
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

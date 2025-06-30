@@ -187,11 +187,12 @@ export function Comment(props: {
 
   return (
     <div
+      className="comment-container"
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >
       <div className="relative flex items-center">
-        <Avatar className="size-5">
+        <Avatar className="comment-avatar">
           <AvatarImage alt={userInfo?.name} src={userInfo?.avatarUrl} />
           <AvatarFallback>{userInfo?.name?.[0]}</AvatarFallback>
         </Avatar>
@@ -259,7 +260,7 @@ export function Comment(props: {
           <EditorContainer variant="comment">
             <Editor
               variant="comment"
-              className="w-auto grow"
+              className="w-auto grow comment-text"
               onClick={() => onEditorClick?.()}
             />
 

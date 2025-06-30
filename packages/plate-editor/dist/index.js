@@ -15292,6 +15292,12 @@ function PlateEditor({ initialTemplate } = {}) {
     ] })
   ] }) }) }) }) });
 }
+function ClientOnly({ children }) {
+  const [mounted, setMounted] = React19.useState(false);
+  React19.useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
+  return /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, { children });
+}
 function EditorContent({ initialTemplate }) {
   return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "h-screen w-full", children: [
     /* @__PURE__ */ jsxRuntime.jsx(SettingsProvider, { children: /* @__PURE__ */ jsxRuntime.jsx(PlateEditor, { initialTemplate }) }),
@@ -15299,7 +15305,7 @@ function EditorContent({ initialTemplate }) {
   ] });
 }
 function PlateEditorWrapper({ initialTemplate }) {
-  return /* @__PURE__ */ jsxRuntime.jsx(React19.Suspense, { fallback: /* @__PURE__ */ jsxRuntime.jsx("div", { className: "h-screen w-full flex items-center justify-center", children: "Loading editor..." }), children: /* @__PURE__ */ jsxRuntime.jsx(EditorContent, { initialTemplate }) });
+  return /* @__PURE__ */ jsxRuntime.jsx(ClientOnly, { children: /* @__PURE__ */ jsxRuntime.jsx(React19.Suspense, { fallback: /* @__PURE__ */ jsxRuntime.jsx("div", { className: "h-screen w-full flex items-center justify-center", children: "Loading editor..." }), children: /* @__PURE__ */ jsxRuntime.jsx(EditorContent, { initialTemplate }) }) });
 }
 
 exports.PlateEditor = PlateEditor;

@@ -137,7 +137,7 @@ export function PlateEditor({ initialTemplate }: PlateEditorProps) {
                 </div>
 
                 {/* Main Content Area */}
-                <div className="flex-1 flex flex-col relative min-w-0">
+                <div className="flex-1 flex flex-col relative min-w-0" style={{ overflow: 'visible', isolation: 'auto', position: 'static' }}>
                   {/* Editor Container */}
                   <EditorContainer
                     id="scroll_container"

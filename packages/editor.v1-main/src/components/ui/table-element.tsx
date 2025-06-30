@@ -341,33 +341,25 @@ type ColorDropdownMenuProps = {
 };
 
 function ColorDropdownMenu({ children, tooltip }: ColorDropdownMenuProps) {
-  const [open, setOpen] = React.useState(false);
-
   const editor = useEditorRef();
   const selectedCells = usePluginOption(TablePlugin, 'selectedCells');
-
   const onUpdateColor = React.useCallback(
     (color: string) => {
-      setOpen(false);
       setCellBackground(editor, { color, selectedCells: selectedCells ?? [] });
     },
     [selectedCells, editor]
   );
-
   const onClearColor = React.useCallback(() => {
-    setOpen(false);
     setCellBackground(editor, {
       color: null,
       selectedCells: selectedCells ?? [],
     });
   }, [selectedCells, editor]);
-
   return (
-    <DropdownMenu open={open} onOpenChange={setOpen} modal={false}>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <ToolbarButton tooltip={tooltip}>{children}</ToolbarButton>
       </DropdownMenuTrigger>
-
       <DropdownMenuContent align="start">
         <ToolbarMenuGroup label="Colors">
           <ColorDropdownMenuItems

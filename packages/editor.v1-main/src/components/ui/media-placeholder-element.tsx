@@ -74,7 +74,7 @@ export const MediaPlaceholderElement = withHOC(
     const { openFilePicker } = useFilePicker({
       accept: currentContent.accept,
       multiple: true,
-      onFilesSelected: ({ plainFiles: updatedFiles }) => {
+      onFilesSelected: ({ plainFiles: updatedFiles, filesContent, errors }) => {
         const firstFile = updatedFiles[0];
         const restFiles = updatedFiles.slice(1);
 
@@ -216,7 +216,7 @@ export function ImageProgress({
   return (
     <div className={cn('relative', className)} contentEditable={false}>
       <img
-        ref={imageRef}
+        ref={imageRef as React.LegacyRef<HTMLImageElement>}
         className="h-auto w-full rounded-sm object-cover"
         alt={file.name}
         src={objectUrl}

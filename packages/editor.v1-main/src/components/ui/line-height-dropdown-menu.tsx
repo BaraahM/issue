@@ -19,19 +19,20 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { ToolbarButton } from './toolbar';
-
 export function LineHeightDropdownMenu({ ...props }: DropdownMenuProps) {
-  const [open, setOpen] = React.useState(false);
   const state = useLineHeightDropdownMenuState();
   const { radioGroupProps } = useLineHeightDropdownMenu(state);
 
   return (
-    <DropdownMenu open={open} onOpenChange={setOpen} modal={false} {...props}>
+    <DropdownMenu {...props}>
       <DropdownMenuTrigger asChild>
-        <ToolbarButton pressed={open} tooltip="Line height" isDropdown>
-          <WrapText />
-        </ToolbarButton>
+        <button
+          type="button"
+          className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:bg-muted hover:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 h-8 min-w-8 px-1.5 bg-transparent"
+          title="Line height"
+        >
+          <WrapText className="size-4" />
+        </button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="min-w-0" align="start">
