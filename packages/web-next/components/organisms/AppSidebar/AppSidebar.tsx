@@ -14,6 +14,9 @@ const AppSidebar = () => {
   const router = useRouter();
   const pathname = usePathname();
 
+  // Hide sidebar when in editor page
+  if (pathname === '/editor') return null;
+
   const isPathActive = (href: string) => {
     if (href === '/') {
       return (

@@ -7,9 +7,10 @@ import TemplatePreview from '@/components/molecules/TemplateGalleryPreview/Templ
 
 interface TemplateGalleryProps {
   onBack: () => void;
+  onTemplateSelect?: (template: Template) => void;
 }
 
-const TemplateGallery = ({ onBack }: TemplateGalleryProps) => {
+const TemplateGallery = ({ onBack, onTemplateSelect }: TemplateGalleryProps) => {
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(
     null,
   );
@@ -21,7 +22,10 @@ const TemplateGallery = ({ onBack }: TemplateGalleryProps) => {
         selectedTemplate={selectedTemplate}
         onTemplateSelect={setSelectedTemplate}
       />
-      <TemplatePreview selectedTemplate={selectedTemplate} />
+      <TemplatePreview 
+        selectedTemplate={selectedTemplate} 
+        onTemplateSelect={onTemplateSelect}
+      />
     </Box>
   );
 };

@@ -6,14 +6,22 @@ import { useRouter } from 'next/navigation';
 
 interface TemplatePreviewProps {
   selectedTemplate: Template | null;
+  onTemplateSelect?: (template: Template) => void;
 }
 
-const TemplatePreview = ({ selectedTemplate }: TemplatePreviewProps) => {
+const TemplatePreview = ({ selectedTemplate, onTemplateSelect }: TemplatePreviewProps) => {
   const router = useRouter();
 
   const handleStartFromTemplate = () => {
-    // Simply redirect to the standalone editor without any template data
-    router.push('/editor');
+    if (selectedTemplate) {
+      if (onTemplateSelect) {
+        // Use the new callback to show editor in the same page
+        onTemplateSelect(selectedTemplate);
+      } else {
+        // Fallback to the old behavior
+        router.push('/editor');
+      }
+    }
   };
 
   if (!selectedTemplate) {

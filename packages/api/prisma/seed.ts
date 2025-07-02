@@ -1,4 +1,4 @@
-import { PrismaClient, ProgressStatus } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
 // Create the stripe customer in stripe dashboard first
 const STIPE_DEMO_CUSTOMER_ID = 'cus_QENjXJz8RXDrWr';
@@ -942,7 +942,7 @@ async function createTeamMembers() {
               createdAt: task.createdAt,
               description: task.description,
               title: task.title,
-              status: ProgressStatus.done,
+              status: 'done',
             })),
           },
         },
